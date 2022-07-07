@@ -1,11 +1,16 @@
 const express = require("express");
-const port = 3001;
-const app = express();
-const router = require("./routes");
-
+require("dotenv").config();
+// const router = require("./routes");
+const router = require("./routes/restaurant.routes");
 const mongoose = require("mongoose");
 
-const mongodb = "mongodb+srv://admin:admin@cluster0.p89rm.mongodb.net/chiens";
+const mongodb = process.env.MONGODB_URI;
+const port = process.env.PORT;
+
+const cors = require("cors");
+
+const app = express();
+app.use(cors());
 app.use(express.json());
 
 mongoose.connect(mongodb, { useNewUrlParser: true, useUnifiedTopology: true });
